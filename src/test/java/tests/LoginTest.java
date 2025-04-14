@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTest {
 
-    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     private LoginPage loginPage;
 
     @BeforeEach
