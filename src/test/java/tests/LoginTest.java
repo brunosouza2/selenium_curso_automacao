@@ -3,8 +3,6 @@ package tests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.*;
