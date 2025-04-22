@@ -1,5 +1,7 @@
 package tests;
 
+import driver.BrowserDriver;
+import driver.BrowserEnumDriver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,17 +15,15 @@ public class LoginTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.loginPage = new LoginPage();
+        this.loginPage = new LoginPage(new BrowserDriver(BrowserEnumDriver.CHROME).getBrowser());
     }
 
     @Test
     public void deveriaEfetuarLoginComDadosValidos() {
         String username = "fulano";
+        String password = "pass";
 
-        loginPage.navegaParaLeiloes();
-        loginPage.clicaNoBotaoEntrar();
-        loginPage.preencheFormularioDeLogin(username, "pass");
-        loginPage.clicaNoBotaoDeLogin();
+        loginPage.logar(username, password);
         loginPage.esperaPelaUrlLeiloes();
 
         assertTrue(loginPage.isUrlLeiloes());
@@ -34,10 +34,10 @@ public class LoginTest {
 
     @Test
     public void naoDeveriaEfetuarLoginComDadosInvalidos() {
-        loginPage.navegaParaLeiloes();
-        loginPage.clicaNoBotaoEntrar();
-        loginPage.preencheFormularioDeLogin("fulanosjj", "fulanosjj");
-        loginPage.clicaNoBotaoDeLogin();
+        String username = "fulanosjj";
+        String password = "fulanosjj";
+
+        loginPage.logar(username, password);
         loginPage.esperaPelaUrlLoginErro();
 
         assertTrue(loginPage.isUrlLoginErro());

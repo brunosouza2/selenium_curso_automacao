@@ -18,30 +18,21 @@ public class LoginPage {
     private static final String URL_DADOS_DO_LEILAO = "http://localhost:8080/leiloes/2";
     private WebDriver browser;
 
-    public LoginPage() {
-        this.browser = new BrowserDriver(BrowserEnumDriver.CHROME).getBrowser();
+    public LoginPage(WebDriver browser) {
+        this.browser = browser;
     }
 
-    public void navegaParaLeiloes() {
+    public LeiloesPage logar(String username, String password) {
         this.browser.navigate().to(URL_LEILOES);
+        this.browser.findElement(By.className("text-light")).click();
+        this.browser.findElement(By.name("username")).sendKeys(username);
+        this.browser.findElement(By.name("password")).sendKeys(password);
+        this.browser.findElement(By.tagName("button")).click();
+        return new LeiloesPage(this.browser);
     }
 
     public void navegaParaDadosDoLeilao() {
-        this.browser.navigate().to(URL_DADOS_DO_LEILAO);
-    }
-
-    public void clicaNoBotaoEntrar() {
-        this.browser.findElement(By.className("text-light")).click();
-    }
-
-    public void preencheFormularioDeLogin(String username, String password) {
-        this.browser.findElement(By.name("username")).sendKeys(username);
-        this.browser.findElement(By.name("password")).sendKeys(password);
-    }
-
-    public void clicaNoBotaoDeLogin() {
-        this.browser.findElement(By.tagName("button")).click();
-
+        browser.navigate().to(URL_DADOS_DO_LEILAO);
     }
 
     public void esperaPelaUrlLeiloes() {
@@ -97,4 +88,6 @@ public class LoginPage {
     public int hashCode() {
         return Objects.hashCode(browser);
     }
+
+
 }
