@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import static driver.BrowserEnumDriver.CHROME;
 
@@ -32,10 +33,12 @@ public class BrowserDriver {
     }
 
     private ChromeOptions setDefaultChromeOptions() {
-        return new ChromeOptions().setExperimentalOption("prefs", new HashMap<String, Boolean>(){{
+        return new ChromeOptions().setExperimentalOption("prefs", new HashMap<String, Object>(){{
             put("credentials_enable_service", false);
             put("profile.password_manager_enabled", false);
-        }});
+            put("safebrowsing.enabled", false);
+        }})
+                .addArguments("--guest");
     }
 
 

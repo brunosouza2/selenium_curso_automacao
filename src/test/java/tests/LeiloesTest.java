@@ -4,15 +4,28 @@ import driver.BrowserDriver;
 import driver.BrowserEnumDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CadastroLeiloesPage;
 import pages.LeiloesPage;
 import pages.LoginPage;
+
+import java.time.Duration;
 
 public class LeiloesTest {
 
     private LeiloesPage leiloesPage;
     private CadastroLeiloesPage cadastroLeiloesPage;
+    private LoginPage loginPage;
+
+    @BeforeEach
+    public void beforeEach() {
+        this.loginPage = new LoginPage(new BrowserDriver(BrowserEnumDriver.CHROME).getBrowser());
+
+        this.leiloesPage = loginPage.logar("fulano", "pass");
+        this.cadastroLeiloesPage = leiloesPage.carregarFormulario();
+    }
 
     @AfterEach
     public void afterEach() {
@@ -21,13 +34,10 @@ public class LeiloesTest {
 
     @Test
     public void deveriaCadastrarNovoLeilao() {
-        LoginPage loginPage = new LoginPage(new BrowserDriver(BrowserEnumDriver.CHROME).getBrowser());
         String nomeLeilao = "HB20";
         String valorInicial = "60000.00";
 
-        this.leiloesPage = loginPage.logar("fulano", "pass");
-        this.cadastroLeiloesPage = leiloesPage.carregarFormulario();
-        this.cadastroLeiloesPage.cadastrarNovoLeilao(nomeLeilao, valorInicial);
+       this.leiloesPage = cadastroLeiloesPage.cadastrarNovoLeilao(nomeLeilao, valorInicial);
 
         Assertions.assertTrue(this.leiloesPage.verificaLeilaoCadastrado(nomeLeilao, valorInicial));
     }
