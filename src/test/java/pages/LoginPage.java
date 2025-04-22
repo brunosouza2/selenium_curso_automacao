@@ -1,15 +1,14 @@
 package pages;
 
+import driver.BrowserDriver;
+import driver.BrowserEnumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Objects;
 
 public class LoginPage {
@@ -17,20 +16,10 @@ public class LoginPage {
     private static final String URL_LEILOES = "http://localhost:8080/leiloes";
     private static final String URL_LOGIN_ERRO = "http://localhost:8080/login?error";
     private static final String URL_DADOS_DO_LEILAO = "http://localhost:8080/leiloes/2";
-    private static final String WEB_DRIVER_KEY = "webdriver.chrome.driver";
-    private static final String WEB_DRIVER_VALUE = "src/drivers/chromedriver.exe";
     private WebDriver browser;
 
     public LoginPage() {
-        System.setProperty(WEB_DRIVER_KEY, WEB_DRIVER_VALUE);
-
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", new HashMap<String, Boolean>(){{
-            put("credentials_enable_service", false);
-            put("profile.password_manager_enabled", false);
-        }});
-
-        this.browser = new ChromeDriver(options);
+        this.browser = new BrowserDriver(BrowserEnumDriver.CHROME).getBrowser();
     }
 
     public void navegaParaLeiloes() {
