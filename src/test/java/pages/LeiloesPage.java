@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ public class LeiloesPage {
     }
 
     public boolean verificaLeilaoCadastrado(String nomeLeilao, String valorLeilao) {
+        new WebDriverWait(this.browser, 5).until(ExpectedConditions.urlToBe(LoginPage.URL_LEILOES));
         return  browser.getPageSource().contains(nomeLeilao) && browser.getPageSource().contains(valorLeilao);
     }
 

@@ -41,4 +41,6 @@ public class LeiloesTest {
 
         Assertions.assertTrue(this.leiloesPage.verificaLeilaoCadastrado(nomeLeilao, valorInicial));
     }
+
+
 }

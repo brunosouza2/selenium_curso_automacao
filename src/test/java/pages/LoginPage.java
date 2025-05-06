@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class LoginPage {
 
-    private static final String URL_LEILOES = "http://localhost:8080/leiloes";
+    public static final String URL_LEILOES = "http://localhost:8080/leiloes";
     private static final String URL_LOGIN_ERRO = "http://localhost:8080/login?error";
     private static final String URL_DADOS_DO_LEILAO = "http://localhost:8080/leiloes/2";
     private WebDriver browser;
